@@ -27,7 +27,7 @@
                                     <h5 class="card-title">{{ $restaurant->name }}</h5>
                                     <h6 class="text-muted">{{ $restaurant->category->name }}</h6>
                                     <p class="card-text">{{ $restaurant->description }}</p>
-                                    <a href="#" class="btn btn-primary">Visítenos</a>
+                                    <a href="{{ route("restaurants.show", $restaurant->id) }}" class="btn btn-primary">Visítenos</a>
                                 </div>
                             </div>
                         </div>
