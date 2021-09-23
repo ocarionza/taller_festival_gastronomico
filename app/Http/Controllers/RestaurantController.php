@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Restaurant;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class RestaurantController extends Controller
 {
@@ -26,7 +29,9 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
+
+        return view("restaurants.create", compact('categories'));
     }
 
     /**
@@ -37,7 +42,20 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // TODO: realizar la validación de los de entrada
+
+        $input = $request->all();
+
+        // Restaurant::create($input);
+
+        $restaurant = new Restaurant();
+        $restaurant->fill($input);
+        $restaurant->user_id = Auth::id(); 
+        $restaurant->save();
+
+        Session::flash('success', 'Restaurante agregado exitosamente'); 
+
+        return redirect(route('home'));
     }
 
     /**

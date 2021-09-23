@@ -40,4 +40,9 @@ class Restaurant extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function scopeOwned($query, $owner)
+    {
+        return $query->where('user_id', '=', $owner);
+    }
 }
