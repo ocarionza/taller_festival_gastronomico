@@ -4,6 +4,16 @@
     <div class="container">
         <h1>Crear un nuevo restaurante</h1>
 
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+            </div>
+        @endif
+
         {{ Form::open(['route' => 'restaurants.store', 'method' => 'post']) }}
             <div class="mb">
                 {{ Form::label('name', 'Nombre', ['class' => 'form-label']) }}
