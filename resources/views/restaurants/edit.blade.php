@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Crear un nuevo restaurante</h1>
+        <h1>Editar un restaurante</h1>
 
         @if($errors->any())
             <div class="alert alert-danger">
@@ -14,11 +14,13 @@
             </div>
         @endif
 
-        {{ Form::open(['route' => 'restaurants.store', 'method' => 'post']) }}
+        {{ Form::model($restaurant, ['route' => ['restaurants.update', $restaurant->id], 'method' => 'put']) }}
+
             @include('restaurants.form_fields')
 
-            {{ Form::submit('Crear', ['class' => 'btn btn-primary']); }}
+            {{ Form::submit('Editar', ['class' => 'btn btn-primary']); }}
             <a href="{{ route('home') }}" class="btn btn-secondary">Cancelar</a>
+
         {!! Form::close() !!}
     </div>
 @endsection
