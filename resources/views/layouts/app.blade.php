@@ -57,6 +57,27 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+                                <a href="{{ route('home') }}" class="nav-link" href="#" role="button" v-pre>
+                                    <i class="fas fa-house-user"></i>
+                                </a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Restaurantes
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('restaurants.index') }}">
+                                        Listar
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('restaurants.create') }}">
+                                        Crear
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -81,9 +102,6 @@
         </nav>
 
         <main class="py-4">
-            @if (isset($flash))
-            @endif
-
             <div class="container">
                 @if (Session::has('success'))
                     <div class="alert alert-success" role="alert">
