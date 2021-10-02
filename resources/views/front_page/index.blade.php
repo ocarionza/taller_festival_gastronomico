@@ -5,6 +5,18 @@
     <div class="container">
         <h1>Nuestros restaurantes</h1>
 
+        {{ Form::open(['url' => route('front_page.index'), 'method' => 'get']) }}
+        <div class="input-group mb-3 mt-1">
+                {{ Form::select('filter', $categories, $filter, ['class' => 'form-control', 'aria-describedby' => 'button-filter']) }}
+                {{ Form::button('<i class="fas fa-search"></i>', [
+                    'class' => 'btn btn-info', 
+                    'id' => 'button-filter',
+                    {{-- 'onclick' => 'submit()', --}}
+                    'type' => 'submit'
+                ]) }}
+        </div>
+        {!! Form::close() !!}
+
         <?php
         $rows = $restaurants->count() / 4;
         ?>
