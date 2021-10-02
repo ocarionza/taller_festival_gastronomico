@@ -18,7 +18,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::orderBy('name', 'asc')->get();
+        $restaurants = Restaurant::owned(Auth::id())->orderBy('name', 'asc')->get();
 
         return view('restaurants.index', compact('restaurants'));
     }
@@ -110,7 +110,7 @@ class RestaurantController extends Controller
 
         Session::flash('success', 'Restaurante editado exitosamente'); 
 
-        return redirect(route('home'));
+        return redirect(route('restaurants.index'));
     }
 
     /**
@@ -125,7 +125,7 @@ class RestaurantController extends Controller
 
         Session::flash('success', 'Restaurante removido exitosamente'); 
 
-        return redirect(route('home'));
+        return redirect(route('restaurants.index'));
     }
 
     /////////////////////////////////////////////////////
