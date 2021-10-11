@@ -42,8 +42,8 @@
             </div>
             <script>
                 function iniciarMapa(){
-                    var latitude = 19.3886;
-                    var longitude = -99.1740;
+                    var latitude = 4.708894493425327;
+                    var longitude = -74.07230017089844;
 
                     coordenadas = {
                         lng: longitude,

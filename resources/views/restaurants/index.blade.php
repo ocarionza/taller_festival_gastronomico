@@ -3,29 +3,51 @@
 @section('content')
 
     <div class="container">
-        <h1>Mis Restaurantes</h1>
-        <a href="{{ route('restaurants.create') }}" class="btn btn-primary" 
+        <h1>ADMINISTRAR RESTAURANTES</h1>
+        <a href="{{ route('restaurants.create') }}" class="btn btn-primary btn-lg btn-block mt-4" 
             title="Crear un nuevo restaurante">Crear</a>
-        <br>
-        <br>
-        <ul class="list-group list-group-flush">
-        @foreach($restaurants as $restaurant)
-            <li class="list-group-item h4">
-                <a href="{{ route('restaurants.show', $restaurant->id) }}" title="Visitar a este restaurante">{{ $restaurant->name }}</a>
 
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <a class="btn btn-warning mt-3" href="{{ route('restaurants.edit', $restaurant->id) }}">Editar</a>
-
-                    {{ Form::open(['route' => [
-                        'restaurants.destroy', $restaurant->id], 
-                        'method' => 'delete',
-                        'onsubmit' => 'return confirm(\'¿Esta seguro que desea remover el restaurante?\n¡Esta acción no se puede deshacer!\')'
-                    ]) }}
-                    <button type="submit" class="btn btn-danger mt-3">Remover</button>
-                    {!! Form::close() !!}
-                </div>
-            </li>
-        @endforeach
-        </ul>
+        <table class="table table-striped mt-4">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Logo</th>
+                    <th scope="col">Acciones</th>
+                </tr>   
+            </thead>
+            <tbody>
+                @foreach($restaurants as $restaurant)
+                    <tr>
+                        <td>{{ $restaurant->name }}</td>
+                        <td>{{ $restaurant->description}}</td>
+                        <td>{{ $restaurant->Category->name }}</td>
+                        <td>
+                            @if (!$restaurant->logo)
+                                    <img src="{{ asset('images/restaurant.png') }}" style="width: 253;height:127px" class="ml-5">
+                                @else
+                                    <img src="{{ asset('images/' . $restaurant->logo) }}" style="width: 253;height:127px" class="ml-5">
+                            @endif
+                        </td>
+                        <td>                       
+                                <a href="{{ route('restaurants.show', $restaurant->id) }}" title="Visitar a este restaurante"></a>
+                
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a class="btn btn-success mr-3" href="{{ route('restaurants.show', $restaurant->id) }}" title="Visitar a este restaurante">VER</a>
+                                    <a class="btn btn-warning mr-3" href="{{ route('restaurants.edit', $restaurant->id) }}">EDITAR</a>
+                                    {{ Form::open(['route' => [
+                                        'restaurants.destroy', $restaurant->id], 
+                                        'method' => 'delete',
+                                        'onsubmit' => 'return confirm(\'¿Esta seguro que desea remover el restaurante?\n¡Esta acción no se puede deshacer!\')'
+                                    ]) }}
+                                    <button type="submit" class="btn btn-danger">REMOVER</button>
+                                    {!! Form::close() !!}
+                                </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 @endsection
