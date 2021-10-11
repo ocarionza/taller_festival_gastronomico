@@ -14,8 +14,7 @@
             </div>
         @endif
 
-        {{ Form::model($restaurant, ['route' => ['restaurants.update', $restaurant->id], 'method' => 'put']) }}
-
+        {{ Form::model($restaurant, ['route' => ['restaurants.update', $restaurant->id], 'method' => 'put', 'files' => true]) }}
             @include('restaurants.form_fields')
 
             {{ Form::submit('Editar', ['class' => 'btn btn-primary']); }}

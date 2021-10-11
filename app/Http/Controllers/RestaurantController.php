@@ -124,6 +124,13 @@ class RestaurantController extends Controller
     {
         $input = $request->all();
 
+        if ($archivo=$request->file('file')) {
+            $nombre = $archivo->getClientOriginalName();
+            $archivo->move('images', $nombre);
+            $input['logo'] = $nombre;
+            $restaurant->update(['logo', $nombre]);
+        }
+
         $restaurant->fill($input);
         $restaurant->user_id = Auth::id(); 
         $restaurant->save();
