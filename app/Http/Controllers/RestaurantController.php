@@ -19,8 +19,8 @@ class RestaurantController extends Controller
     public function index()
     {
         $restaurants = Restaurant::owned(Auth::id())->orderBy('name', 'asc')->get();
-
-        return view('restaurants.index', compact('restaurants'));
+        $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
+        return view('restaurants.index', compact('restaurants', 'categories'));
     }
 
     /**
@@ -58,6 +58,12 @@ class RestaurantController extends Controller
         }
 
         $input = $request->all();
+
+        if ($archivo=$request->file('file')) {
+            $nombre = $archivo->getClientOriginalName();
+            $archivo->move('images', $nombre);
+            $input['logo'] = $nombre;
+        }
 
         // $validated = $request->validate([
         //     'name'        => 'required|string|min:5|max:50',

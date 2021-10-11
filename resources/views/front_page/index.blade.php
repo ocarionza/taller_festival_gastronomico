@@ -34,7 +34,7 @@
 
                         <div class="col-3 mb-3">                        
                             <div class="card">
-                                <img src="{{ asset('images/restaurant.png') }}" class="card-img-top">
+                                <img src="{{ asset('images/' . $restaurant->logo) }}" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $restaurant->name }}</h5>
                                     <h6 class="text-muted">{{ $restaurant->category->name }}</h6>

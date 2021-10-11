@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        {{ Form::open(['route' => 'restaurants.store', 'method' => 'post']) }}
+        {{ Form::open(['route' => 'restaurants.store', 'method' => 'post', 'files' => true]) }}
             @include('restaurants.form_fields')
 
             {{ Form::submit('Crear', ['class' => 'btn btn-primary']); }}

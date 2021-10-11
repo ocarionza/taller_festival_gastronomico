@@ -22,3 +22,7 @@
                 {{ Form::label('category_id', 'Categoría', ['class' => 'form-label']) }}
                 {{ Form::select('category_id', $categories, null, ['class' => 'form-control']); }}
             </div>
+            <div class="mb mb-3">
+                {{ Form::label('logo', 'Seleccionar logo restaurante', ['class' => 'form-label']) }}
+                {{ Form::file('file') }}
+            </div>
