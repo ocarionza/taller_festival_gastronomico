@@ -97,7 +97,8 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return view('restaurants.show', compact('restaurant'));
+        $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
+        return view('restaurants.show', compact('restaurant', 'categories'));
     }
 
     /**

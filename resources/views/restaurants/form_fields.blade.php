@@ -24,7 +24,7 @@
             </div>
             <div class="mb mb-2">
                 {{ Form::label('schedule', 'Horario', ['class' => 'form-label']) }}
-                {{ Form::text('schedule', null, ['class' => 'form-control', 'maxlength' => 70]) }}
+                {{ Form::text('schedule', null, ['class' => 'form-control']) }}
             </div>
             <div class="mb mb-2">
                 {{ Form::label('latitude', 'Latitud', ['class' => 'form-label']) }}

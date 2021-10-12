@@ -2,8 +2,12 @@
 
 @section('content')
 
-    <div class="container">
-        <h1>Nuestros restaurantes</h1>
+<div class="container">
+    <div class="jumbotron">
+            
+        <h1 class="display-4">Nuestros Restaurantes!</h1>
+        <p class="lead">Aqui tiene el listado completo de todos los restaurantes que hacen parte de la feria, puedes filtarr por tu categoria favorita</p>
+        <hr class="my-4">
 
         {{ Form::open(['url' => route('front_page.index'), 'method' => 'get']) }}
         <div class="input-group mb-3 mt-4">
@@ -35,14 +39,14 @@
                         <div class="col-3 mb-3 mt-3">                        
                             <div class="card">
                                 @if (!$restaurant->logo)
-                                    <img src="{{ asset('images/restaurant.png') }}" class="card-img-top">
+                                    <img src="{{ asset('images/restaurant.png') }}" class="card-img-top" style="width: 253;height:127px">
                                 @else
-                                    <img src="{{ asset('images/' . $restaurant->logo) }}" class="card-img-top">
+                                    <img src="{{ asset('images/' . $restaurant->logo) }}" class="card-img-top" style="width: 253;height:127px">
                                 @endif
                                     <div class="card-body" style="height: 12rem">
                                         <h5 class="card-title">{{ $restaurant->name }}</h5>
                                         <h6 class="text-muted">{{ $restaurant->category->name }}</h6>
-                                        <p class="card-text">{{ $restaurant->description }}</p>
+                                        <p class="card-text">{{ Str::limit($restaurant->description, 50, '...') }}</p>
                                         <a href="{{ route("restaurants.show", $restaurant->id) }}" class="btn btn-primary">Visítenos</a>
                                     </div>
                             </div>
@@ -57,5 +61,6 @@
 
         {{ $restaurants->links() }}
     </div>
+</div>
 
 @endsection
