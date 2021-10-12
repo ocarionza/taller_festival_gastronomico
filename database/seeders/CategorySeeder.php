@@ -41,6 +41,25 @@ class CategorySeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+            [
+                'name' => 'Comida de mar',
+                'description' => 'Todo tipo de comida marina',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Especiales',
+                'description' => 'Comida para eventos especiales',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Desayuno',
+                'description' => 'Deliciosos desayunos',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+
         ]);
     }
 }

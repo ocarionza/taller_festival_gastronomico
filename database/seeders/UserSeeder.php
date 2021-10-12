@@ -19,26 +19,33 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'Brayan Ocampo',
-                'email' => 'zajoseza@gmail.com',
-                'password' => Hash::make('joseb123'),
+                'name' => 'Administrador',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('admin1234'),
                 'type' => 'admin',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
 
             [
-                'name' => 'Santiago Galvis Tabares',
-                'email' => 'sgalvis@autonoma.edu.co',
-                'password' => Hash::make('hola123'),
-                'type' => 'admin',
+                'name' => 'Usuario1',
+                'email' => 'user1@gmail.com',
+                'password' => Hash::make('12345678'),
+                'type' => 'user',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
-
             [
-                'name' => 'Usuario',
-                'email' => 'user@gmail.ocm',
+                'name' => 'Usuario2',
+                'email' => 'user2@gmail.com',
+                'password' => Hash::make('12345678'),
+                'type' => 'user',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Usuario3',
+                'email' => 'user3@gmail.com',
                 'password' => Hash::make('12345678'),
                 'type' => 'user',
                 'created_at' => Carbon::now(),
@@ -46,8 +53,24 @@ class UserSeeder extends Seeder
             ],
 
             [
-                'name' => 'Owner',
-                'email' => 'owner@gmail.ocm',
+                'name' => 'Owner1',
+                'email' => 'owner1@gmail.com',
+                'password' => Hash::make('12345678'),
+                'type' => 'owner',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Owner2',
+                'email' => 'owner2@gmail.com',
+                'password' => Hash::make('12345678'),
+                'type' => 'owner',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Owner3',
+                'email' => 'owner3@gmail.com',
                 'password' => Hash::make('12345678'),
                 'type' => 'owner',
                 'created_at' => Carbon::now(),
