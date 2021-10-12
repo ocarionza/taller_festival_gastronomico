@@ -18,7 +18,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::owned(Auth::id())->orderBy('name', 'asc')->get();
+        $restaurants = Restaurant::owned(Auth::id())->orderBy('name', 'asc')->paginate(8);
         $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
         return view('restaurants.index', compact('restaurants', 'categories'));
     }

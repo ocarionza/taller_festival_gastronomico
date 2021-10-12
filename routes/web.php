@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('restaurants', App\Http\Controllers\RestaurantController::class);
     Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::resource('categories', App\Http\Controllers\CategoryController::class);
 });
 
 // Route::get('/restaurants', [App\Http\Controllers\RestaurantController::class, 'index'])->name('restaurants.index');
