@@ -11,11 +11,10 @@
 
         {{ Form::open(['url' => route('front_page.index'), 'method' => 'get']) }}
         <div class="input-group mb-3 mt-4">
-                {{ Form::select('filter', $categories, $filter, ['class' => 'form-control', 'aria-describedby' => 'button-filter']) }}
+                {{ Form::select('filter', $categories, $filter, ['class' => 'form-control', 'aria-describedby' => 'button-filter', 'placeholder'=>'Selecione una categoria']) }}   
                 {{ Form::button('<i class="fas fa-search"></i>', [
                     'class' => 'btn', 
                     'id' => 'button-filter',
-                    {{-- 'onclick' => 'submit()', --}}
                     'type' => 'submit'
                 ]) }}
         </div>

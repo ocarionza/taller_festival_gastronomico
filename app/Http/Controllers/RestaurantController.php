@@ -162,7 +162,7 @@ class RestaurantController extends Controller
     {
         $filter = $request['filter'] ?? null;
 
-        if(!isset($request['filter']))
+        if(!$request['filter'])
             $restaurants = Restaurant::orderBy('name', 'asc')->paginate(8);
         else
         {
