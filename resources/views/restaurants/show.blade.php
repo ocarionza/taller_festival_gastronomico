@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="col-md-3 col-xl-2 bd-sidebar position-fixed" style="margin-bottom: -231px;">
-   <a class="btn btn-dark mb-2" href="{{ $restaurant->facebook }}" style="width: 55px;height: auto;"><i class="fab fa-facebook fa-2x mt-1 mb-1"></i></a><br>
-   <a class="btn btn-dark mb-2" href="{{ $restaurant->youtube }}" style="width: 55px;height: auto;"><i class="fab fa-youtube fa-2x mt-1 mb-1 mr-3"></i></a><br>
-   <a class="btn btn-dark mb-2" href="{{ $restaurant->instagram }}" style="width: 55px;height: auto;"><i class="fab fa-instagram fa-2x mt-1 mb-1"></i></a><br>
-   <a class="btn btn-dark mb-2" href="{{ $restaurant->twitter }}" style="width: 55px;height: auto;"><i class="fab fa-twitter-square fa-2x mt-1 mb-1"></i></a><br>
+   <a class="btn btn-dark mb-2" target="_blank" href="{{ $restaurant->facebook }}" style="width: 55px;height: auto;"><i class="fab fa-facebook fa-2x mt-1 mb-1"></i></a><br>
+   <a class="btn btn-dark mb-2" target="_blank" href="{{ $restaurant->youtube }}" style="width: 55px;height: auto;"><i class="fab fa-youtube fa-2x mt-1 mb-1 mr-3"></i></a><br>
+   <a class="btn btn-dark mb-2" target="_blank" href="{{ $restaurant->instagram }}" style="width: 55px;height: auto;"><i class="fab fa-instagram fa-2x mt-1 mb-1"></i></a><br>
+   <a class="btn btn-dark mb-2" target="_blank" href="{{ $restaurant->twitter }}" style="width: 55px;height: auto;"><i class="fab fa-twitter-square fa-2x mt-1 mb-1"></i></a><br>
 </div>
 
 <div class="container">

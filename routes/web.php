@@ -23,7 +23,7 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\RestaurantController::class, 'welcome'])->name('home.index');
 Route::get('home-restaurants', [App\Http\Controllers\RestaurantController::class, 'showFrontPage'])->name('front_page.index');
 Route::post('restaurants/{restaurant}/comments', [App\Http\Controllers\CommentController::class, 'storec'])->name('comments.storec');
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+Route::get('/home', [App\Http\Controllers\RestaurantController::class, 'welcome'])->name('home.index');
 Route::resource('restaurants', App\Http\Controllers\RestaurantController::class);
 Route::resource('users', App\Http\Controllers\UserController::class);
 Route::resource('categories', App\Http\Controllers\CategoryController::class);
