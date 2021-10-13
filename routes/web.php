@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\RestaurantController::class, 'showFrontPage'])->name('front_page.index');
-
+Route::get('comments/{restaurant}', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
 //////////////////////////////////////////////
 
 Route::middleware(['auth'])->group(function () {
@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('restaurants', App\Http\Controllers\RestaurantController::class);
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::resource('categories', App\Http\Controllers\CategoryController::class);
+    Route::resource('comments', App\Http\Controllers\CommentController::class);
 });
 
 // Route::get('/restaurants', [App\Http\Controllers\RestaurantController::class, 'index'])->name('restaurants.index');

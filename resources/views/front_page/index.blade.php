@@ -35,7 +35,7 @@
                         $restaurant = $restaurants[$i * 4 + $j];
                         ?>
 
-                        <div class="col-3 mb-3 mt-3">                        
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3 mt-3">                        
                             <div class="card">
                                 @if (!$restaurant->logo)
                                     <img src="{{ asset('images/restaurant.png') }}" class="card-img-top" style="width: 253;height:127px">

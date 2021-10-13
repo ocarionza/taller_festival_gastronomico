@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Restaurant;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreRestaurantResquest;
@@ -18,9 +20,25 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::owned(Auth::id())->orderBy('name', 'asc')->paginate(8);
-        $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
-        return view('restaurants.index', compact('restaurants', 'categories'));
+
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
+        {
+            Session::flash('failure', 'El usuario no tiene permisos para administrar restaurantes.'); 
+
+            return redirect(route('home'));
+        }
+
+        if(Auth::user()->type != 'admin')
+        {
+            $restaurants = Restaurant::owned(Auth::id())->orderBy('name', 'asc')->paginate(8);
+            $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
+            return view('restaurants.index', compact('restaurants', 'categories'));
+        }else{
+
+            $restaurants = Restaurant::orderBy('name', 'asc')->paginate(8);
+            $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
+            return view('restaurants.index', compact('restaurants', 'categories'));
+        }
     }
 
     /**
@@ -97,8 +115,12 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
+        $comments = Comment::orderBY('id', 'desc')->get();
+        foreach($comments as $comment){
+            $user = User::select()->where('id', '=', $comment->user_id)->first();
+        }
         $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
-        return view('restaurants.show', compact('restaurant', 'categories'));
+        return view('restaurants.show', compact('restaurant', 'categories', 'comments', 'user'));
     }
 
     /**

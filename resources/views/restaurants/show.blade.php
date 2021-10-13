@@ -9,7 +9,7 @@
    <a class="btn btn-dark mb-2" href="{{ $restaurant->twitter }}" style="width: 55px;height: auto;"><i class="fab fa-twitter-square fa-2x mt-1 mb-1"></i></a><br>
 </div>
 
-<div class="container clearfix">
+<div class="container">
       <div class="carousel-inner">
          <div class="carousel-item active">
             @if (!$restaurant->logo)
@@ -94,4 +94,42 @@
      </script>
      <script src="https://maps.googleapis.com/maps/api/js?key=&callback=iniciarMapa"></script>
    </div>
+   
+   <div class="jumbotron mt-3">
+      <h1 class="display-4">Seccion de cometarios</h1>
+      <p class="lead">Aqui puedes ver los comentarios de nuestros clientes, tu tambien puedes dejar el tuyo.</p>
+      <hr class="my-4">
+
+      @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+            </div>
+        @endif
+
+         {{ Form::open(['route' => 'comments.store', 'method' => 'post']) }}
+               @include('restaurants.form_comments')
+
+               {{ Form::submit('Publicar', ['class' => 'btn btn-primary mt-2 mb-5']); }}
+         {!! Form::close() !!}
+
+         @foreach($comments as $comment)
+            <div class="row">
+               <div class="col-md-1">
+                  <strong>{{ $user->name }}:</strong>
+               </div>
+               <div class='col-md-6 ml-3'>
+                  {{ $comment->comment }}
+               </div>
+               <i>Puntuacion: {{$comment->score}}</i>
+         </div>
+         <hr />
+        @endforeach
+         
+
+    </div>
+</div>
 @endsection
