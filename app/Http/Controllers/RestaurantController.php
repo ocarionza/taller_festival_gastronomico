@@ -250,7 +250,8 @@ class RestaurantController extends Controller
 
     public function welcome()
     {
-        return redirect(route('home'));
+        $restaurants = Restaurant::orderBy('name', 'asc')->get();
+        return view('home.index', compact('restaurants'));
     }
 
 
