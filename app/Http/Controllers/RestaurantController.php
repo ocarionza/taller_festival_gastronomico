@@ -20,6 +20,13 @@ class RestaurantController extends Controller
      */
     public function index()
     {
+        if (Auth::guest()) {
+        
+            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
+
+            return redirect(route('home'));
+
+        }
 
         if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
         {
@@ -34,7 +41,6 @@ class RestaurantController extends Controller
             $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
             return view('restaurants.index', compact('restaurants', 'categories'));
         }else{
-
             $restaurants = Restaurant::orderBy('name', 'asc')->paginate(8);
             $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
             return view('restaurants.index', compact('restaurants', 'categories'));
@@ -48,12 +54,21 @@ class RestaurantController extends Controller
      */
     public function create()
     {
+        if (Auth::guest()) {
+        
+            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
+
+            return redirect(route('home'));
+
+        }
+
         if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
         {
             Session::flash('failure', 'El usuario no tiene permisos para crear restaurantes.'); 
 
             return redirect(route('home'));
         }
+
 
         $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
 
@@ -68,6 +83,14 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantResquest $request)
     {
+        if (Auth::guest()) {
+        
+            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
+
+            return redirect(route('home'));
+
+        }
+
         if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
         {
             Session::flash('failure', 'El usuario no tiene permisos para crear restaurantes.'); 
@@ -127,13 +150,22 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
-        {
-            Session::flash('failure', 'El usuario no tiene permisos para modificar restaurantes.'); 
+    if (Auth::guest()) {
+        
+            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
 
             return redirect(route('home'));
-        }
 
+    }
+
+    if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
+    {
+        Session::flash('failure', 'El usuario no tiene permisos para modificar restaurantes.'); 
+
+        return redirect(route('home'));
+    }
+
+    
         $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
 
         return view("restaurants.edit", compact('categories', 'restaurant'));
@@ -174,12 +206,22 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
+
+        if (Auth::guest()) {
+        
+            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
+
+            return redirect(route('home'));
+
+        }
+
         if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
         {
             Session::flash('failure', 'El usuario no tiene permisos para remover restaurantes.'); 
 
             return redirect(route('home'));
         }
+
         $restaurant->delete();
 
         Session::flash('success', 'Restaurante removido exitosamente'); 
@@ -206,7 +248,7 @@ class RestaurantController extends Controller
         return view('front_page.index', compact('restaurants', 'categories', 'filter'));
     }
 
-    public function showWelcome()
+    public function welcome()
     {
         return redirect(route('home'));
     }

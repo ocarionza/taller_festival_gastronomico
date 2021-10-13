@@ -6,7 +6,7 @@
     <div class="jumbotron">
             
         <h1 class="display-4">Nuestros Restaurantes!</h1>
-        <p class="lead">Aqui tiene el listado completo de todos los restaurantes que hacen parte de la feria, puedes filtarr por tu categoria favorita</p>
+        <p class="lead">Aqui tiene el listado completo de todos los restaurantes que hacen parte de la feria, puedes filtrar por tu categoria favorita</p>
         <hr class="my-4">
 
         {{ Form::open(['url' => route('front_page.index'), 'method' => 'get']) }}

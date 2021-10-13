@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -27,7 +27,6 @@ class HomeController extends Controller
     public function index()
     {
         $restaurants = Restaurant::owned(Auth::id())->orderBy('name', 'asc')->get();
-
         return view('home.index', compact('restaurants'));
     }
 }

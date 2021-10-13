@@ -38,13 +38,18 @@
                 
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <a class="btn btn-success mr-3" href="{{ route('restaurants.show', $restaurant->id) }}" title="Visitar a este restaurante">VER</a>
-                                    <a class="btn btn-primary mr-3" href="{{ route('restaurants.edit', $restaurant->id) }}">MODIFICAR</a>
-                                    {{ Form::open(['route' => [
-                                        'restaurants.destroy', $restaurant->id], 
-                                        'method' => 'delete',
-                                        'onsubmit' => 'return confirm(\'¿Esta seguro que desea remover el restaurante?\n¡Esta acción no se puede deshacer!\')'
-                                    ]) }}
-                                    <button type="submit" class="btn btn-danger">ELIMINAR</button>
+                                    @if ($restaurant->user_id == Auth::id() || Auth::user()->type == 'admin')
+                                        <a class="btn btn-primary mr-3" href="{{ route('restaurants.edit', $restaurant->id) }}">MODIFICAR</a>
+                                        {{ Form::open(['route' => [
+                                            'restaurants.destroy', $restaurant->id], 
+                                            'method' => 'delete',
+                                            'onsubmit' => 'return confirm(\'¿Esta seguro que desea remover el restaurante?\n¡Esta acción no se puede deshacer!\')'
+                                        ]) }}
+                                        <button type="submit" class="btn btn-danger">ELIMINAR</button>
+                                    @else
+
+
+                                    @endif
                                     {!! Form::close() !!}
                                 </div>
                         </td>

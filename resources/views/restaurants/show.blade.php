@@ -25,22 +25,26 @@
    @if (Auth::guest())
 
    @else 
-   @if (Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
-   
-   @else
-      <blockquote class="blockquote text-right">
-         <div class="btn-group" role="group" aria-label="Basic example">
-            <a class="btn btn-dark mr-2" href="{{ route('restaurants.edit', $restaurant->id) }}" style="width: 55px;height: auto;"><i class="fas fa-pen-square fa-2x mt-1 mb-1"></i></a>
-            {{ Form::open(['route' => [
-               'restaurants.destroy', $restaurant->id], 
-               'method' => 'delete',
-               'onsubmit' => 'return confirm(\'¿Esta seguro que desea remover el restaurante?\n¡Esta acción no se puede deshacer!\')'
-            ]) }}
-            <button type="submit" class="btn btn-dark" style="width: 55px;height: auto;"><i class="fas fa-trash-alt fa-2x mt-1 mb-1"></i></button>
-            {!! Form::close() !!}
-         </div>
-      </blockquote>
-   @endif
+      @if (Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
+      
+      @else
+         @if ($restaurant->user_id == Auth::id() || Auth::user()->type == 'admin')
+            <blockquote class="blockquote text-right">
+               <div class="btn-group" role="group" aria-label="Basic example">
+                  <a class="btn btn-dark mr-2" href="{{ route('restaurants.edit', $restaurant->id) }}" style="width: 55px;height: auto;"><i class="fas fa-pen-square fa-2x mt-1 mb-1"></i></a>
+                  {{ Form::open(['route' => [
+                     'restaurants.destroy', $restaurant->id], 
+                     'method' => 'delete',
+                     'onsubmit' => 'return confirm(\'¿Esta seguro que desea remover el restaurante?\n¡Esta acción no se puede deshacer!\')'
+                  ]) }}
+                  <button type="submit" class="btn btn-dark" style="width: 55px;height: auto;"><i class="fas fa-trash-alt fa-2x mt-1 mb-1"></i></button>
+                  {!! Form::close() !!}
+               </div>
+            </blockquote> 
+         @else
+
+         @endif
+      @endif
    @endif
 
       <h1 class="display-4">{{ $restaurant ->name }}</h1>
