@@ -3,7 +3,9 @@
 @section('content')
     <div class="container">
         <div class="jumbotron">
-            <h1>Editar un restaurante</h1>
+            <h1 class="display-4">Modificar Restaurantes</h1>
+            <p class="lead">Formulario que le permitira modificar un restaurante</p>
+            <hr class="my-4">
 
             @if($errors->any())
                 <div class="alert alert-danger">

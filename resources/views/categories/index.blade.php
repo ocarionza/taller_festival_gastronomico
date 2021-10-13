@@ -10,7 +10,7 @@
         <a href="{{ route('categories.create') }}" class="btn btn-dark btn-lg btn-block mt-4" 
             title="Crear un nueva categoria">Crear</a>
 
-        <table class="table table-striped mt-4">
+        <table class="table table-striped mt-4 table-responsive text-center">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">ID</th>
@@ -22,10 +22,10 @@
             <tbody>
                 @foreach($categories as $category)
                     <tr>
-                        <td>{{ $category->id }}</td>
-                        <td>{{ $category->name }}</td>
-                        <td>{{ $category->description }}</td>
-                        <td>                                       
+                        <td style="width: 59px;height:auto">{{ $category->id }}</td>
+                        <td style="width: 187px;height:auto">{{ $category->name }}</td>
+                        <td style="width: 436px;height:auto">{{ $category->description }}</td>
+                        <td style="width: 366px;height:auto">                                       
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <a class="btn btn-primary mr-3" href="{{ route('categories.edit', $category->id) }}">MODIFICAR</a>
                                     {{ Form::open(['route' => [

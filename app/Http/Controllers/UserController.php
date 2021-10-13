@@ -17,6 +17,12 @@ class UserController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->type != 'admin')
+        {
+            Session::flash('failure', 'El usuario no tiene permisos para administrar usuarios.'); 
+
+            return redirect(route('home'));
+        }
         $users = User::orderBy('name', 'asc')->paginate(8);
         return view('users.index', compact('users'));
     }
@@ -83,6 +89,13 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        if(Auth::user()->type != 'admin')
+        {
+            Session::flash('failure', 'El usuario no tiene permisos para modificar usuarios.'); 
+
+            return redirect(route('home'));
+        }
+        
         $password=$user['password'];
 
         return view("users.edit", compact('user', 'password'));
@@ -108,7 +121,7 @@ class UserController extends Controller
         $user->fill($input);
         $user->save();
 
-        Session::flash('success', 'Usuario actualizado exitosamente'); 
+        Session::flash('success', 'Usuario modificado exitosamente'); 
 
         return redirect(route('users.index'));
     }
@@ -121,6 +134,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if(Auth::user()->type != 'admin')
+        {
+            Session::flash('failure', 'El usuario no tiene permisos para modificar usuarios.'); 
+
+            return redirect(route('home'));
+        }
         $user->delete();
 
         Session::flash('success', 'Usuario removido exitosamente'); 

@@ -17,6 +17,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        if(Auth::user()->type != 'admin')
+        {
+            Session::flash('failure', 'El usuario no tiene permisos para administrar categorias.'); 
+
+            return redirect(route('home'));
+        }
+
         $categories = Category::orderBy('name', 'asc')->paginate(8);
         return view('categories.index', compact('categories'));
     }
@@ -28,7 +35,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
+        if(Auth::user()->type != 'admin')
         {
             Session::flash('failure', 'El usuario no tiene permisos para crear categorias.'); 
 
@@ -46,7 +53,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
+        if(Auth::user()->type != 'admin')
         {
             Session::flash('failure', 'El usuario no tiene permisos para crear categorias.'); 
 
@@ -82,6 +89,13 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        if(Auth::user()->type != 'admin')
+        {
+            Session::flash('failure', 'El usuario no tiene permisos para modificar categorias.'); 
+
+            return redirect(route('home'));
+        }
+
         return view("categories.edit", compact('category'));
     }
 
@@ -116,6 +130,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        if(Auth::user()->type != 'admin')
+        {
+            Session::flash('failure', 'El usuario no tiene permisos para modificar categorias.'); 
+
+            return redirect(route('home'));
+        }
         $category->delete();
 
         Session::flash('success', 'Categoria removida exitosamente'); 

@@ -127,6 +127,13 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
+        {
+            Session::flash('failure', 'El usuario no tiene permisos para modificar restaurantes.'); 
+
+            return redirect(route('home'));
+        }
+
         $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
 
         return view("restaurants.edit", compact('categories', 'restaurant'));
@@ -154,7 +161,7 @@ class RestaurantController extends Controller
         $restaurant->user_id = Auth::id(); 
         $restaurant->save();
 
-        Session::flash('success', 'Restaurante editado exitosamente'); 
+        Session::flash('success', 'Restaurante modificado exitosamente'); 
 
         return redirect(route('restaurants.index'));
     }
@@ -167,6 +174,12 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
+        {
+            Session::flash('failure', 'El usuario no tiene permisos para remover restaurantes.'); 
+
+            return redirect(route('home'));
+        }
         $restaurant->delete();
 
         Session::flash('success', 'Restaurante removido exitosamente'); 

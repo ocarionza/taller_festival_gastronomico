@@ -22,18 +22,26 @@
 
    <div class="jumbotron">
 
-   <blockquote class="blockquote text-right">
-      <div class="btn-group" role="group" aria-label="Basic example">
-         <a class="btn btn-dark mr-2" href="{{ route('restaurants.edit', $restaurant->id) }}" style="width: 55px;height: auto;"><i class="fas fa-pen-square fa-2x mt-1 mb-1"></i></a>
-         {{ Form::open(['route' => [
-            'restaurants.destroy', $restaurant->id], 
-            'method' => 'delete',
-            'onsubmit' => 'return confirm(\'¿Esta seguro que desea remover el restaurante?\n¡Esta acción no se puede deshacer!\')'
-         ]) }}
-         <button type="submit" class="btn btn-dark" style="width: 55px;height: auto;"><i class="fas fa-trash-alt fa-2x mt-1 mb-1"></i></button>
-         {!! Form::close() !!}
-      </div>
-   </blockquote>
+   @if (Auth::guest())
+
+   @else 
+   @if (Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
+   
+   @else
+      <blockquote class="blockquote text-right">
+         <div class="btn-group" role="group" aria-label="Basic example">
+            <a class="btn btn-dark mr-2" href="{{ route('restaurants.edit', $restaurant->id) }}" style="width: 55px;height: auto;"><i class="fas fa-pen-square fa-2x mt-1 mb-1"></i></a>
+            {{ Form::open(['route' => [
+               'restaurants.destroy', $restaurant->id], 
+               'method' => 'delete',
+               'onsubmit' => 'return confirm(\'¿Esta seguro que desea remover el restaurante?\n¡Esta acción no se puede deshacer!\')'
+            ]) }}
+            <button type="submit" class="btn btn-dark" style="width: 55px;height: auto;"><i class="fas fa-trash-alt fa-2x mt-1 mb-1"></i></button>
+            {!! Form::close() !!}
+         </div>
+      </blockquote>
+   @endif
+   @endif
 
       <h1 class="display-4">{{ $restaurant ->name }}</h1>
       <p class="lead">{{ $restaurant->category->name }}</p>
@@ -114,8 +122,21 @@
          
          <div class="alert alert-success" role="alert">
             Debe estar logeado para hacer comentarios
-          </div>
+         </div>
          
+            @foreach($restaurant->comments as $comment)
+               <div class="row">
+                  <div class="col-md-1">
+                     <strong>{{ $comment->user->name }}:</strong>
+                  </div>
+                  <div class='col-md-6 ml-3'>
+                     {{ $comment->comment }}
+                  </div>
+                  <i>Puntuacion: {{$comment->score}}</i>
+                  <i class="ml-5 text-muted">{{$comment->created_at->diffForHumans()}}</i>
+            </div>
+            <hr />
+            @endforeach
          @else
 
             {{ Form::open([ 'route' => ['comments.storec', $restaurant->id ], 'method' => 'post' ]) }}

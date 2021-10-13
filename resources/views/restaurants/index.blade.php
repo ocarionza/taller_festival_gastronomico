@@ -4,11 +4,13 @@
 
 <div class="container">
     <div class="jumbotron">
-        <h1>ADMINISTRAR RESTAURANTES</h1>
+        <h1 class="display-4">Administrar Restaurantes</h1>
+        <p class="lead">Ventana que le permitira realizar acciones con sus restaurantes</p>
+        <hr class="my-4">
         <a href="{{ route('restaurants.create') }}" class="btn btn-dark btn-lg btn-block mt-4" 
             title="Crear un nuevo restaurante">Crear</a>
 
-        <table class="table table-striped mt-4">
+        <table class="table table-striped mt-4 table-responsive text-center">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Nombre</th>
@@ -21,17 +23,17 @@
             <tbody>
                 @foreach($restaurants as $restaurant)
                     <tr>
-                        <td>{{ $restaurant->name }}</td>
-                        <td>{{ Str::limit($restaurant->description, 100, '...') }}</td>
-                        <td>{{ $restaurant->Category->name }}</td>
-                        <td>
+                        <td style="width: 141px;height:auto">{{ $restaurant->name }}</td>
+                        <td style="width: 165px;height:auto">{{ Str::limit($restaurant->description, 100, '...') }}</td>
+                        <td style="width: 109px;height:auto">{{ $restaurant->Category->name }}</td>
+                        <td style="width: 326px;height:auto">
                             @if (!$restaurant->logo)
                                     <img src="{{ asset('images/restaurant.png') }}" style="width: 253;height:127px" class="ml-5">
                                 @else
                                     <img src="{{ asset('images/' . $restaurant->logo) }}" style="width: 253;height:127px" class="ml-5">
                             @endif
                         </td>
-                        <td>                       
+                        <td style="width: 307px;height:auto">                       
                                 <a href="{{ route('restaurants.show', $restaurant->id) }}" title="Visitar a este restaurante"></a>
                 
                                 <div class="btn-group" role="group" aria-label="Basic example">

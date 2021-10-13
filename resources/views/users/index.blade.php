@@ -10,7 +10,7 @@
         <a href="{{ route('users.create') }}" class="btn btn-dark btn-lg btn-block mt-4" 
             title="Crear un nuevo usuario">Crear</a>
 
-        <table class="table table-striped mt-4">
+        <table class="table table-striped mt-4 table-responsive text-center">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">ID</th>
@@ -23,11 +23,11 @@
             <tbody>
                 @foreach($users as $user)
                     <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->type }}</td>
-                        <td>                                       
+                        <td style="width: 66px;height:auto">{{ $user->id }}</td>
+                        <td style="width: 200px;height:auto">{{ $user->name }}</td>
+                        <td style="width: 263px;height:auto">{{ $user->email }}</td>
+                        <td style="width: 112px;height:auto">{{ $user->type }}</td>
+                        <td style="width: 408px;height:auto">                                       
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <a class="btn btn-primary mr-3" href="{{ route('users.edit', $user->id) }}">MODIFICAR</a>
                                     {{ Form::open(['route' => [
