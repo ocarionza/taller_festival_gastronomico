@@ -38,22 +38,25 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storec(Request $request, $id)
     {
-        if(!Auth::check())
+        if(Auth::check())
         {
-            Session::flash('failure', 'debe estar logueado para hacer comentarios.'); 
-        }
 
         $input = request()->all();
         $comment = new Comment();
         $comment->fill($input);
         $comment->user_id = Auth::id();
-        $comment->restaurant_id = Restaurant::orderBy('name', 'asc')->pluck('id');
+        $comment->restaurant_id = $id;
         $comment->save();
 
-        Session::flash('success', 'Restaurante agregado exitosamente'); 
-        // return redirect('restaurants.show', $restaurant->$id);
+        Session::flash('success', 'Comentario publicado');
+        return redirect()->route('restaurants.show', ['restaurant' => $id]);
+            
+        }
+
+        Session::flash('failure', 'Debe estar logueado para hacer comentarios.'); 
+        return redirect()->route('front_page.index');
     }
 
     /**
@@ -100,4 +103,7 @@ class CommentController extends Controller
     {
         //
     }
+
+
+
 }

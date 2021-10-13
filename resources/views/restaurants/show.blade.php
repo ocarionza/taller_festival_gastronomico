@@ -110,25 +110,34 @@
             </div>
         @endif
 
-         {{ Form::open(['route' => 'comments.store', 'method' => 'post']) }}
-               @include('restaurants.form_comments')
-
-               {{ Form::submit('Publicar', ['class' => 'btn btn-primary mt-2 mb-5']); }}
-         {!! Form::close() !!}
-
-         @foreach($comments as $comment)
-            <div class="row">
-               <div class="col-md-1">
-                  <strong>{{ $user->name }}:</strong>
-               </div>
-               <div class='col-md-6 ml-3'>
-                  {{ $comment->comment }}
-               </div>
-               <i>Puntuacion: {{$comment->score}}</i>
-         </div>
-         <hr />
-        @endforeach
+         @if (Auth::guest())
          
+         <div class="alert alert-success" role="alert">
+            Debe estar logeado para hacer comentarios
+          </div>
+         
+         @else
+
+            {{ Form::open([ 'route' => ['comments.storec', $restaurant->id ], 'method' => 'post' ]) }}
+                  @include('restaurants.form_comments')
+
+                  {{ Form::submit('Publicar', ['class' => 'btn btn-primary mt-2 mb-5']); }}
+            {!! Form::close() !!}
+
+            @foreach($restaurant->comments as $comment)
+               <div class="row">
+                  <div class="col-md-1">
+                     <strong>{{ $comment->user->name }}:</strong>
+                  </div>
+                  <div class='col-md-6 ml-3'>
+                     {{ $comment->comment }}
+                  </div>
+                  <i>Puntuacion: {{$comment->score}}</i>
+                  <i class="ml-5 text-muted">{{$comment->created_at->diffForHumans()}}</i>
+            </div>
+            <hr />
+            @endforeach
+        @endif
 
     </div>
 </div>

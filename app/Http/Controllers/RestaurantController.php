@@ -115,12 +115,8 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        $comments = Comment::orderBY('id', 'desc')->get();
-        foreach($comments as $comment){
-            $user = User::select()->where('id', '=', $comment->user_id)->first();
-        }
         $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
-        return view('restaurants.show', compact('restaurant', 'categories', 'comments', 'user'));
+        return view('restaurants.show', compact('restaurant', 'categories'));
     }
 
     /**
@@ -196,4 +192,11 @@ class RestaurantController extends Controller
 
         return view('front_page.index', compact('restaurants', 'categories', 'filter'));
     }
+
+    public function showWelcome()
+    {
+        return redirect(route('home'));
+    }
+
+
 }

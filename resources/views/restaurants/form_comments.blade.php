@@ -1,6 +1,6 @@
 <div class="mb mb-2">
-    {{ Form::label('description', 'Comentario', ['class' => 'form-label']) }}
-    {{ Form::textarea('description', null, ['class' => 'form-control', 'rows' => '4']) }}
+    {{ Form::label('comment', 'Comentario', ['class' => 'form-label']) }}
+    {{ Form::textarea('comment', null, ['class' => 'form-control', 'rows' => '4']) }}
 </div>
 <div class="mb mb-2">
     {{ Form::select('score', ['0' => '1', 

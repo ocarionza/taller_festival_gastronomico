@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\RestaurantController::class, 'showFrontPage'])->name('front_page.index');
-Route::get('comments/{restaurant}', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
-//////////////////////////////////////////////
+Route::get('/', [App\Http\Controllers\RestaurantController::class, 'showWelcome'])->name('home.index');
+Route::get('home-restaurants', [App\Http\Controllers\RestaurantController::class, 'showFrontPage'])->name('front_page.index');
+Route::post('restaurants/{restaurant}/comments', [App\Http\Controllers\CommentController::class, 'storec'])->name('comments.storec');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

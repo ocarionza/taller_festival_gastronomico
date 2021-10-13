@@ -57,7 +57,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a href="{{ route('home') }}" class="nav-link" href="#" role="button" v-pre>
+                                <a href="{{ route('front_page.index') }}" class="nav-link" href="#" role="button" v-pre>
                                     <i class="fas fa-house-user"></i>
                                 </a>
                             </li>
