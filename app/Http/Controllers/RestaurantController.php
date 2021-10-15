@@ -20,14 +20,6 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        if (Auth::guest()) {
-        
-            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
-
-            return redirect(route('home.index'));
-
-        }
-
         if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
         {
             Session::flash('failure', 'El usuario no tiene permisos para administrar restaurantes.'); 
@@ -54,13 +46,6 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        if (Auth::guest()) {
-        
-            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
-
-            return redirect(route('home.index'));
-
-        }
 
         if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
         {
@@ -83,13 +68,6 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantResquest $request)
     {
-        if (Auth::guest()) {
-        
-            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
-
-            return redirect(route('home.index'));
-
-        }
 
         if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
         {
@@ -150,14 +128,6 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-    if (Auth::guest()) {
-        
-            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
-
-            return redirect(route('home.index'));
-
-    }
-
     if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
     {
         Session::flash('failure', 'El usuario no tiene permisos para modificar restaurantes.'); 
@@ -206,15 +176,6 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-
-        if (Auth::guest()) {
-        
-            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
-
-            return redirect(route('home.index'));
-
-        }
-
         if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner')
         {
             Session::flash('failure', 'El usuario no tiene permisos para remover restaurantes.'); 

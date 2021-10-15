@@ -107,7 +107,7 @@
      <script src="https://maps.googleapis.com/maps/api/js?key=&callback=iniciarMapa"></script>
    </div>
    
-   <div class="jumbotron mt-3">
+   <div class="jumbotron mt-3" id="comments">
       <h1 class="display-4">Seccion de cometarios</h1>
       <p class="lead">Aqui puedes ver los comentarios de nuestros clientes, tu tambien puedes dejar el tuyo.</p>
       <hr class="my-4">

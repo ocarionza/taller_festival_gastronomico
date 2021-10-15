@@ -44,23 +44,14 @@ class CommentController extends Controller
         //TODO
         if(Auth::check())
         {   
-            $input = request()->all();
-            
-            if($input['comment'] == null | $input['score'] == null){
-                Session::flash('failure', 'Debe ingresar los campos solicitados');
-                return redirect()->route('restaurants.show', ['restaurant' => $id]);
-            }else{
-                $comment = new Comment();
-                $comment->fill($input);
-                $comment->user_id = Auth::id();
-                $comment->restaurant_id = $id;
-                $comment->save();
-
-                Session::flash('success', 'Comentario publicado');
-                return redirect()->route('restaurants.show', ['restaurant' => $id]);
-            }
-            
-            
+        dd($input = $request->all());
+        $comment = new Comment();
+        $comment->fill($input);
+        $comment->user_id = Auth::id();
+        $comment->restaurant_id = $id;
+        $comment->save();
+        Session::flash('success', 'Comentario publicado');
+        return redirect()->route('restaurants.show', ['restaurant' => $id]);
         }
 
         Session::flash('failure', 'Debe estar logueado para hacer comentarios.'); 
