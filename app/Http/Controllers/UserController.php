@@ -17,21 +17,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (Auth::guest()) {
-        
-            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
-
-            return redirect(route('home'));
-
-        }
-            
         if(Auth::user()->type != 'admin')
         {
             Session::flash('failure', 'El usuario no tiene permisos para administrar usuarios.'); 
 
-            return redirect(route('home'));
+            return redirect(route('home.index'));
         }
-        $users = User::orderBy('name', 'asc')->paginate(8);
+
+        $users = User::orderBy('id', 'asc')->paginate(8);
         return view('users.index', compact('users'));
     }
 
@@ -42,19 +35,11 @@ class UserController extends Controller
      */
     public function create(User $user)
     {
-        if (Auth::guest()) {
-        
-            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
-
-            return redirect(route('home'));
-
-        }
-            
         if(Auth::user()->type != 'admin')
         {
             Session::flash('failure', 'El usuario no tiene permisos para crear usuarios.'); 
 
-            return redirect(route('home'));
+            return redirect(route('home.index'));
         }
         return view("users.create");
     }
@@ -67,18 +52,11 @@ class UserController extends Controller
      */
     public function store(StoreUserResquest $request)
     {
-        if (Auth::guest()) {
-        
-            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
-
-            return redirect(route('home'));
-
-        }
         if(Auth::user()->type != 'admin')
         {
             Session::flash('failure', 'El usuario no tiene permisos para crear usuarios.'); 
 
-            return redirect(route('home'));
+            return redirect(route('home.index'));
         }
 
         $input = $request->all();
@@ -89,7 +67,7 @@ class UserController extends Controller
 
         Session::flash('success', 'Usuario agregado exitosamente'); 
 
-        return redirect(route('home'));
+        return redirect(route('users.index'));
     }
 
     /**
@@ -110,20 +88,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-    {
-        if (Auth::guest()) {
-        
-            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
-
-            return redirect(route('home'));
-
-        }
-            
+    {     
         if(Auth::user()->type != 'admin')
         {
             Session::flash('failure', 'El usuario no tiene permisos para modificar usuarios.'); 
 
-            return redirect(route('home'));
+            return redirect(route('home.index'));
         }
         $password=$user['password'];
 
@@ -145,8 +115,6 @@ class UserController extends Controller
         //$user['password']=$password;
         //$user->update(['password', $password]);
 
-
-
         $user->fill($input);
         $user->save();
 
@@ -163,19 +131,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if (Auth::guest()) {
-        
-            Session::flash('failure', 'El usuario no tiene permisos para acceder a este sitio.'); 
-
-            return redirect(route('home'));
-
-        }
-            
         if(Auth::user()->type != 'admin')
         {
             Session::flash('failure', 'El usuario no tiene permisos para modificar usuarios.'); 
 
-            return redirect(route('home'));
+            return redirect(route('home.index'));
         }
         $user->delete();
     

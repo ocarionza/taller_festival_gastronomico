@@ -28,7 +28,7 @@
                             @endif
                             <div class="bg-dark text-center" style="width:100%;height:auto; color:white;">
                                 <h1 class="display-7" style="padding-top: 10px;">{{ $restaurant->name }}</h1>
-                                <p class="lead" style="padding-bottom: 10px;">{{ $restaurant->description }}</p>
+                                <p class="lead" style="padding-bottom: 10px;">{{ Str::limit($restaurant->description, 100, '...') }}</p>
                             </div>
                         </div>
                     @empty

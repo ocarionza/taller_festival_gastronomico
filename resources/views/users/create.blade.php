@@ -21,7 +21,7 @@
                 @include('users.form_fields')
 
                 {{ Form::submit('Crear', ['class' => 'btn btn-primary mt-2']); }}
-                <a href="{{ route('home') }}" class="btn btn-secondary mt-2">Cancelar</a>
+                <a href="{{ route('users.index') }}" class="btn btn-secondary mt-2">Cancelar</a>
             {!! Form::close() !!}
         </div>
     </div>

@@ -21,7 +21,7 @@
                 @include('restaurants.form_fields')
 
                 {{ Form::submit('Crear', ['class' => 'btn btn-primary']); }}
-                <a href="{{ route('home') }}" class="btn btn-secondary">Cancelar</a>
+                <a href="{{ route('restaurants.index') }}" class="btn btn-secondary">Cancelar</a>
             {!! Form::close() !!}
         </div>
     </div>
