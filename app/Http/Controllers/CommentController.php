@@ -9,6 +9,7 @@ use App\Models\Comment;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StoreCommentRequest;
 
 class CommentController extends Controller
 {
@@ -38,20 +39,27 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storec(Request $request, $id)
+    public function storec(StoreCommentRequest $request, $id)
     {
+        //TODO
         if(Auth::check())
-        {
+        {   
+            $input = request()->all();
+            
+            if($input['comment'] == null | $input['score'] == null){
+                Session::flash('failure', 'Debe ingresar los campos solicitados');
+                return redirect()->route('restaurants.show', ['restaurant' => $id]);
+            }else{
+                $comment = new Comment();
+                $comment->fill($input);
+                $comment->user_id = Auth::id();
+                $comment->restaurant_id = $id;
+                $comment->save();
 
-        $input = request()->all();
-        $comment = new Comment();
-        $comment->fill($input);
-        $comment->user_id = Auth::id();
-        $comment->restaurant_id = $id;
-        $comment->save();
-
-        Session::flash('success', 'Comentario publicado');
-        return redirect()->route('restaurants.show', ['restaurant' => $id]);
+                Session::flash('success', 'Comentario publicado');
+                return redirect()->route('restaurants.show', ['restaurant' => $id]);
+            }
+            
             
         }
 

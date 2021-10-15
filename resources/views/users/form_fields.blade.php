@@ -8,7 +8,7 @@
 </div>
 <div class="mb mb-2">
     {{ Form::label('password', 'Contraseña', ['class' => 'form-label']) }}
-    {{ Form::text('password', null,['class' => 'form-control', 'maxlength' => 30]) }}
+    {{ Form::password('password',['class' => 'form-control', 'maxlength' => 30]) }}
 </div>
 <div class="mb mb-3">
     {{ Form::label('type', 'Tipo usuario', ['class' => 'form-label']) }}

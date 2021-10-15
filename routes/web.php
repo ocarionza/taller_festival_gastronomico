@@ -26,6 +26,8 @@ Auth::routes();
     Route::get('restaurants/view/{restaurant}', [App\Http\Controllers\RestaurantController::class, 'view'])->name('restaurants.view');
 
     Route::middleware(['auth'])->group(function () {
+        Route::get('/home', [App\Http\Controllers\RestaurantController::class, 'welcome'])->name('home.index');
+        
         Route::resource('restaurants', App\Http\Controllers\RestaurantController::class);
         Route::resource('users', App\Http\Controllers\UserController::class);
         Route::resource('categories', App\Http\Controllers\CategoryController::class);

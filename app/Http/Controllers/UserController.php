@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreUserResquest;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -95,9 +96,10 @@ class UserController extends Controller
 
             return redirect(route('home.index'));
         }
-        $password=$user['password'];
 
-        return view("users.edit", compact('user', 'password'));
+        $oldPassword = $user->password;
+
+        return view("users.edit", compact('user', 'oldPassword'));
     }
 
     /**
@@ -107,7 +109,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUserResquest $request, User $user)
+    public function update(Request $request, User $user)
     {
         $input = $request->all();
 
@@ -115,6 +117,11 @@ class UserController extends Controller
         //$user['password']=$password;
         //$user->update(['password', $password]);
 
+        if (!$input['password']){
+            $input['password'] = Hash::make($user->password);
+        }
+
+        $input['password'] = Hash::make($user->password);
         $user->fill($input);
         $user->save();
 
