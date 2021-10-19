@@ -15,12 +15,12 @@
                     @forelse($restaurants as $restaurant)
                         <div class="carousel-item @if($loop->index==0) active @endif">
                             @if (!$restaurant->logo)
-                                    <a href="{{ route("restaurants.show", $restaurant->id) }}"><img src="{{ asset('images/restaurant.png') }}" 
+                                    <a href="{{ route("restaurants.view", $restaurant->id) }}"><img src="{{ asset('images/restaurant.png') }}" 
                                     class="d-block w-100" 
                                     alt="{{$restaurant->name}}"
                                     style="width: 100%;height: 555px"></a>
                                 @else
-                                <a href="{{ route("restaurants.show", $restaurant->id) }}"><img src="{{ asset('images/' . $restaurant->logo) }}" 
+                                <a href="{{ route("restaurants.view", $restaurant->id) }}"><img src="{{ asset('images/' . $restaurant->logo) }}" 
                                     class="d-block w-100" 
                                     alt="{{$restaurant->name}}"
                                     style="width: 100%;height: 555px"></a>
