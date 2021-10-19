@@ -44,7 +44,7 @@ class CommentController extends Controller
         //TODO
         if(Auth::check())
         {   
-        dd($input = $request->all());
+        $input = $request->all();
         $comment = new Comment();
         $comment->fill($input);
         $comment->user_id = Auth::id();
