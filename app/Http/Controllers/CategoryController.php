@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Models\Restaurant;
 
 class CategoryController extends Controller
 {
@@ -135,11 +136,26 @@ class CategoryController extends Controller
 
             return redirect(route('home.index'));
         }
+
+        $restaurants = Restaurant::orderBy('name', 'asc')->get('category_id');
+        
+        $flag = false;
+        foreach($restaurants as $restaurant){
+            if($restaurant->category_id == $category['id']){
+                $flag = true;
+            }
+        }
+        
+        if(!$flag){
+            $category->delete();
+
+            Session::flash('success', 'Categoria removida exitosamente'); 
     
-        $category->delete();
-
-        Session::flash('success', 'Categoria removida exitosamente'); 
-
-        return redirect(route('categories.index'));
+            return redirect(route('categories.index'));         
+        }else{
+            Session::flash('failure', 'No es posible remover la categoria, ya que esta tiene restaurantes asociados'); 
+            return redirect(route('categories.index'));
+        }
+       
     }
 }
