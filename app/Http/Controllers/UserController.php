@@ -63,7 +63,7 @@ class UserController extends Controller
         $input = $request->all();
         $user = new User();
         $user->fill($input);
-        //$user->password = bcrypt($user->password);
+        $user->password = bcrypt($user->password);
         $user->save();
 
         Session::flash('success', 'Usuario agregado exitosamente'); 
@@ -118,11 +118,13 @@ class UserController extends Controller
         //$user->update(['password', $password]);
 
         if (!$input['password']){
-            $input['password'] = Hash::make($user->password);
+            $user->fill(['name', 'email', 'type']);
+        }else{
+            $user->fill($input);
+            $user->password = bcrypt($user->password);
         }
 
-        $input['password'] = Hash::make($user->password);
-        $user->fill($input);
+        
         $user->save();
 
         Session::flash('success', 'Usuario modificado exitosamente'); 
