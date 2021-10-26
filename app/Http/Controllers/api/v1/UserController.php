@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\v1\UserResource;
 
 class UserController extends Controller
 {
@@ -15,8 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::select('name', 'email', 'type')->get();
-        return response()->json(['data' => $users], 200);
+        $users = User::orderBy('name', 'asc')->get();
+        //return response()->json(['data' => $users], 200);
+        return UserResource::collection($users);
     }
 
     /**
@@ -38,7 +40,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return response()->json(['data' => $user], 200);
+        //return response()->json(['data' => $user], 200);
+
+        return (new UserResource($user))
+        ->response()
+        ->setStatusCode(200);
     }
 
     /**

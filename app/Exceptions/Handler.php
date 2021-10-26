@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -49,6 +49,11 @@ class Handler extends ExceptionHandler
         if($exception instanceof ModelNotFoundException)
         {
             return response()->json(['error' => 'No es posible obtener el objeto solicitado'], 404);
+        }
+
+        if($exception instanceof NotFoundHttpException)
+        {
+            return response()->json(['error' => 'No fue posible obtener el recurso solicitado'], 404);
         }
 
         if ($exception instanceof QueryException) {
