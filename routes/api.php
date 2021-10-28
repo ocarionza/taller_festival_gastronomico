@@ -27,6 +27,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::post('/v1/logout',[App\Http\Controllers\api\v1\AuthController::class,'logout'])->name('api.logout');
     Route::apiResource('v1/restaurants', RestaurantController::class);
     Route::apiResource('v1/users', UserController::class);
+    Route::apiResource('v1/comments', CommentController::class);
    });
 
-Route::apiResource('v1/comments', CommentController::class);
+
