@@ -63,6 +63,6 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         $comment->delete();
-        return response()->json(['menssage' => 'restaurante removido exitosamente'], 200);
+        return response()->json(['menssage' => 'Comentario removido exitosamente'], 200);
     }
 }
